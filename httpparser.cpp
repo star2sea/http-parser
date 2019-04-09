@@ -4,7 +4,8 @@ using namespace httpparser;
 void HttpParser::parser_init(HttpMessage *msg, enum http_parser_type type, const ParseDoneCallback & cb)
 {
 	http_parser_init(&parser_, type);
-	
+    parser_.data = this;
+    
 	http_parser_settings_init(&settings_);
 
 	settings_.on_message_begin = on_message_begin;

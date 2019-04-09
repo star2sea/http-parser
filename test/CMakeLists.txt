@@ -1,0 +1,2 @@
+add_executable(httpparser_test test.cpp)
+target_link_libraries(httpparser_test http_parser)
