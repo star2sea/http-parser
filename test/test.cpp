@@ -43,6 +43,8 @@ int main()
     });
 
 	parser.parse(resp_str.c_str(), resp_str.length());
+	
+	getchar();
 
     return 0;
 }
