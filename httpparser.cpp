@@ -1,5 +1,6 @@
 #include "httpparser.h"
 #include <assert.h>
+#include <iostream>
 using namespace httpparser;
 void HttpParser::parser_init(HttpMessage *msg, enum http_parser_type type, const ParseDoneCallback & cb)
 {
@@ -69,10 +70,7 @@ int HttpParser::header_field_cb(const char *buf, size_t len)
 		header_.clear();
 		value_.clear();
 	}
-	else
-	{
-		header_.append(buf, len);
-	}
+	header_.append(buf, len);
 	return 0;
 }
 

@@ -17,6 +17,7 @@ namespace httpparser
 		void setHeader(const std::string &k, const std::string &v) { headers_[k] = v; }
         void setHeader(const std::string &k, int v) {headers_[k] = std::to_string(v);}
 		void setStatus(unsigned int status_code) { status_code_ = status_code; }
+		void setStatus(http_status status_code) { status_code_ = status_code; }
 		void setStatusStr(const char *buf, size_t len) { status_str_ = std::string(buf, len); }
         void setStatusStr(const std::string & status_str) { status_str_ = status_str; }
 		void setMethod(unsigned int method) { method_ = method; }

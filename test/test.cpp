@@ -26,11 +26,13 @@ int main()
     
     HttpResponse resp;
     resp.setMethod(HTTP_GET);
+	resp.setStatus(HTTP_STATUS_OK);
     resp.setHeader("test", 10);
     resp.setKeepAlive(true, true);
+	resp.setBody(std::string("hello"), true);
     
     auto resp_str = resp.toStr();
-    std::cout << resp_str << std::endl;
+    //std::cout << resp_str << std::endl;
     resp.reset();
     
     parser.parser_init(&resp, HTTP_RESPONSE, [&](bool ret){
@@ -39,5 +41,8 @@ int main()
         else
             std::cout << "parser response error" << std::endl;
     });
+
+	parser.parse(resp_str.c_str(), resp_str.length());
+
     return 0;
 }
