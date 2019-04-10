@@ -1,33 +1,19 @@
 cmake_minimum_required(VERSION 2.6)
-project(http_parser)
-enable_testing()
-set(CMAKE_BUILD_TYPE "Debug")
-#add_definitions(-std=c++11)
-message(STATUS ${CXX_FLAGS})
+project(http_parser CXX)
+
+set(SRC_C parser/http_parser.h parser/http_parser.c)
+set(SRC_CPP httpparser.h httpparser.cpp httpmessage.h httpmessage.cpp)
+
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-include_directories(${PROJECT_SOURCE_DIR})
-string(TOUPPER ${CMAKE_BUILD_TYPE} BUILD_TYPE)
-message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_TYPE}})
-
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/libs)
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
 include_directories(${PROJECT_SOURCE_DIR})
-link_directories(${PROJECT_BINARY_DIR}/libs)
 
-macro(add_vg_source_dir name)
-    file(GLOB SRC_FILE ${name}/*.h ${name}/*.hpp ${name}/*.cc ${name}/*.cpp ${name}/*.c)
-    list(APPEND ALL_SRC ${SRC_FILE})
-    source_group(${name} FILES ${SRC_FILE})
-endmacro()
-
-add_vg_source_dir(parser)
-
-file(GLOB SRC_FILE *.h *.cpp)
-list(APPEND ALL_SRC ${SRC_FILE})
-
-add_library(http_parser STATIC ${ALL_SRC})
+add_library(http_parser STATIC ${SRC_C} ${SRC_CPP})
 
 add_subdirectory(test)
+
+install(FILES parser/http_parser.h DESTINATION include/http_parser/parser)
+install(FILES http_message.h http_parser.h DESTINATION include/http_parser)
+
+install(TARGETS http_parser DESTINATION lib)
