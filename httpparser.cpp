@@ -35,6 +35,8 @@ size_t HttpParser::parse(const char *buf, size_t len)
 int HttpParser::message_begin_cb()
 {
 	message_->reset();
+	header_.clear();
+	value_.clear();
 	return 0;
 }
 

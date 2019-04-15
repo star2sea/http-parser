@@ -4,9 +4,11 @@ using namespace httpparser;
 
 void HttpMessage::reset()
 {
-    http_major_ = 1;
-    http_minor_ = 1;
-    keep_alive_ = false;
+	http_major_ = 1;
+	http_minor_ = 1;
+
+	keep_alive_ = false;
+   
     headers_.clear();
     body_.clear();
     
