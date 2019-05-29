@@ -1,4 +1,5 @@
 #include "httpparser.h"
+#include <string.h>
 #include <iostream>
 using namespace httpparser;
 
