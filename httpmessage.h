@@ -40,6 +40,8 @@ namespace httpparser
             return iter != headers_.end() ? iter->second : "";
         }
         std::map<std::string, std::string> getHeaders() const {return headers_;}
+		
+		virtual std::string toStr() const = 0;
 
         void reset();
 
@@ -61,14 +63,14 @@ namespace httpparser
 	{
 	public:
         enum http_parser_type msgtype_ = HTTP_REQUEST;
-        std::string toStr() const;
+        virtual std::string toStr() const override;
 	};
 
 	class HttpResponse : public HttpMessage
 	{
     public:
         enum http_parser_type msgtype_ = HTTP_RESPONSE;
-        std::string toStr() const;
+        virtual std::string toStr() const override;
 	};
 	
 }
