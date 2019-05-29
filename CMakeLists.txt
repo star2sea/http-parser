@@ -7,7 +7,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_VERBOSE_MAKEFILE ON)set(SRC_C parser/http_parser.h parser/http_parser.c)
+set(CMAKE_VERBOSE_MAKEFILE ON)
+set(SRC_C parser/http_parser.h parser/http_parser.c)
 set(SRC_CPP httpparser.h httpparser.cpp httpmessage.h httpmessage.cpp)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
