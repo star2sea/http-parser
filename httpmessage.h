@@ -10,6 +10,7 @@ namespace httpparser
 	class HttpMessage
 	{
 	public:
+		virtual ~HttpMessage() {}
 		void setVersion(unsigned short major, unsigned short minor) { http_major_ = major; http_minor_ = minor; }
         void setKeepAlive(bool keepalive, bool addHeader = false) { keep_alive_ = keepalive; if (addHeader) setHeader("Connection", "keep-alive");}
         void setBody(const char *buf, size_t len, bool addHeader=false) { body_ = std::string(buf, len); if (addHeader) setHeader("Content-Length", len);}
