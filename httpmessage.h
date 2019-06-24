@@ -12,7 +12,17 @@ namespace httpparser
 	public:
 		virtual ~HttpMessage() {}
 		void setVersion(unsigned short major, unsigned short minor) { http_major_ = major; http_minor_ = minor; }
-        void setKeepAlive(bool keepalive, bool addHeader = false) { keep_alive_ = keepalive; if (addHeader) setHeader("Connection", "keep-alive");}
+		void setKeepAlive(bool keepalive, bool addHeader = false)
+		{
+			keep_alive_ = keepalive;
+			if (addHeader)
+			{
+				if (keep_alive_)
+					setHeader("Connection", "Keep-Alive");
+				else
+					setHeader("Connection", "close");
+			}
+		}
         void setBody(const char *buf, size_t len, bool addHeader=false) { body_ = std::string(buf, len); if (addHeader) setHeader("Content-Length", len);}
         void setBody(const std::string & body, bool addHeader=false) { body_ = body; if (addHeader) setHeader("Content-Length", body.length());}
 		void setHeader(const std::string &k, const std::string &v) { headers_[k] = v; }
@@ -64,6 +74,7 @@ namespace httpparser
 	{
 	public:
         enum http_parser_type msgtype_ = HTTP_REQUEST;
+		virtual ~HttpRequest() {}
         virtual std::string toStr() const override;
 	};
 
@@ -71,6 +82,7 @@ namespace httpparser
 	{
     public:
         enum http_parser_type msgtype_ = HTTP_RESPONSE;
+		virtual ~HttpResponse() {}
         virtual std::string toStr() const override;
 	};
 	
